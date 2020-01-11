@@ -1,0 +1,29 @@
+LCD_ShowString函数
+形参列表具有六个参数
+u16 x
+u16 y
+u16 width
+u16 height
+u8 size
+u8 *p
+至于u8和u16的本质是int/char，可以在头文件stdint.h查到，这是C语言的一个头文件，不是keil特有的
+keil里再次用typedef将其简化
+8位(=1字节)对应char
+16位(=2字节)对应int
+
+下面依次来看这六个参数
+x和y是字体起始位置坐标(按像素位置)，【相当于生成文字矩形块的左上角】
+width和height是生成显示文字的矩形宽度和高度
+size是字体大小，这里注意只有12/16/24/32四种字体大小，其本质是在font.h头文件中对点阵进行描绘
+此外，font.h中的字符对应ASCII码是实际ASCII码移位32(2的5次方)，有位移
+*p就表示char *p，是字符数组即字符串
+
+另外，字符与字符之间间隔像素 = size/2，就是字体大小的一半
+
+
+
+输入字符大小size1和字符串长度length
+就可以得到
+高度height=size1
+宽度width=length * size/2
+
